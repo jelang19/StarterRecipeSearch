@@ -8,38 +8,22 @@ import pickle as pkl
 import numpy as np
 import json
 import copy
+import recipeUtil as recUt
 
 f = open("recipeData/spoonacularRecDetails.txt", "r")
 fileText = f.read()
 f.close()
 
 parsed = json.loads(fileText)
+parsedLen = len(parsed)
 
-featVals = []
-maxLen = 0
+print("\nIdeal Recipes")
+ingrList = ["chicken breast", "chicken", "chicken breasts", "roast chicken", "egg", "eggs", "brown rice", "rice"]
+recUt.findRecsWithIngrs(parsed, ingrList, 0, 30)
 
-for d in parsed:
-    recVals = []
-    valsList = d.values()
-    for val in valsList:
-        if (type(val) == list):
-            for i in val:
-                recVals.append(i)
-        else:
-            recVals.append(val)
-    featVals.append(copy.copy(recVals))
-    if (len(recVals) > maxLen):
-        maxLen = len(recVals)
+print("\nNext Range Recipes")
+ingrList = ["chicken breast", "chicken", "chicken breasts", "roast chicken", "egg", "eggs", "brown rice", "rice"]
+recUt.findRecsWithIngrs(parsed, ingrList, 31, 40)
 
-print(maxLen)
+# recUt.findIdxIngrsByStr(parsed, "rice")
 
-for row in featVals:
-    oldLen = len(row)
-
-# featValsArr = np.array(featVals)
-
-# keepFeatVals = featValsArr[:, 2:5]
-
-# print(keepFeatVals[0])
-
-# testLabels = []

@@ -12,7 +12,8 @@ headers = {"x-api-key": "5f7958c1414d412a920d8e937f3f1e10"}
 recDetailsBaseUrl = "https://api.spoonacular.com/recipes/informationBulk?ids="
 
 def apiGetRecipes():
-    results = requests.get(baseUrl + "?type=main course&number=45&offset=355&instructionsRequired&maxReadyTime=90&maxServings=8", headers=headers)
+    results = requests.get(baseUrl + "?type=main course&number=56&offset=99&instructionsRequired&maxReadyTime=90&maxServings=8", headers=headers)
+    # results = requests.get(baseUrl + "?type=main course&number=45&offset=355&instructionsRequired&maxReadyTime=90&maxServings=8", headers=headers)
     data = results.json()
     # dataDict = data.loads(data)
     # print(type(data))
@@ -101,10 +102,11 @@ for recDictLine in results['results']:
     recDetailsUrl += "%d," % recDictLine['id']
     recIDList.append(recDictLine['id'])
 
-# print(str(recDetailsUrl))
+print(str(recDetailsUrl))
 
 
 recResult = requests.get(recDetailsUrl, headers=headers)
+# print(recResult)
 data = recResult.json()
 
 newDict = filterRecipeValues(data)
